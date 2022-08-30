@@ -1,0 +1,93 @@
+{% extends '_base.html' %}
+{% load static widget_tweaks dash_tags %}
+
+{% block content %}
+
+{% url "dashboard:job_seeker_dashboard" as dashboard_url %}
+{% url 'dashboard:job_seeker_offers_list' as offers_list_url %}
+{% url 'dashboard:job_seeker_offres_postuler' as offers_postuler_url %}
+{% url 'dashboard:view-resume' as view_cv_url %}
+{% url 'dashboard:job_seeker_kpi' as kpi_url %}
+
+
+<div class="dashboard-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="profile-item">
+                    <img src="
+                    {% if user.avatar %}
+                    {{ user.avatar.url }}
+                    {% else %}
+                    {% static 'img/dashboard1.jpg' %}
+                    {% endif %}
+                    " alt="Photo de {{ user.get_full_name }}" />
+                    <h2>{{ user.get_full_name }}</h2>
+                    <span>{{ user.title|default_if_none:'Chercheur emplois' }}</span>
+                </div>
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link {% current_link_active 'job_seeker_kpi' %}" href="{{ kpi_url }}">
+                        <i class='bx bxs-inbox'></i> Tableau de bord
+                    </a>
+
+                    <a class=" nav-link {% current_link_active 'job_seeker_offres_postuler' %} "
+                        href="{{ offers_postuler_url }}">
+                        <i class="bx bxs-inbox"></i> Offres Postulées
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'view-resume' %}" href="{{ view_cv_url }}">
+                        <div class="profile-list">
+                            <i class="bx bx-note"></i> Mon CV
+                        </div>
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'job_seeker_dashboard' %}" href="{{ dashboard_url }}">
+                        <div class="profile-list">
+                            <i class="bx bx-user"></i> Parametre
+                        </div>
+                    </a>
+
+                    <a href="javascript:{document.getElementById('logout').submit()}">
+                        <div class="profile-list">
+                            <i class="bx bx-log-out"></i> Déconnexion
+                            <form action="{% url 'logout' %}" method="POST" id="logout">
+                                {% csrf_token %}
+                                <input type="hidden" />
+                            </form>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                        aria-labelledby="v-pills-home-tab">
+                        <div class="profile-content">
+                            {% block dash_content %}
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="profile-content-inner">
+                                    <h2 class="text-center">Information personnelle</h2>
+                                    <div class="row">
+                                        {% for field in form %}
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>{{ field.label }}:</label> {{ field }}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn dashboard-btn">
+                                    Valider mes infos
+                                </button>
+                            </form>
+                            {% endblock dash_content %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

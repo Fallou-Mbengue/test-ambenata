@@ -1,0 +1,318 @@
+{% extends "_base.html" %} {% load static %} {% block content %}
+
+<section id="job" class="employer-area pb-100">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="simple-search-wrap text-left">
+                    <div class="hero_item">
+                        <h1 class="banner_title mb-4">
+                            <span style="color: #00205B;"> Trouver un </span> <span style="color: #C8102E;"> emploi
+                            </span> <span style="color: #00205B;"> facilement </span>
+                        </h1>
+                        <div class="btn btn-lg btn-success scrollto">
+                            <a href="#offres" class="btn theme-bg btn-md text-white">Voir les
+                                offres</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="simple-search-wrap text-left">
+                    <div class="hero_item">
+                        <h1 class="banner_title mb-4">
+                            <span style="color: #00205B;"> Explorer les différentes </span> <span
+                                style="color: #C8102E;"> projets </span>
+                        </h1>
+                        <div class="btn btn-lg btn-success scrollto">
+                            <a href="#projets" class="btn theme-bg btn-md text-white">Voir les
+                                projets</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="work-area pb-70">
+    <div class="container">
+        <div class="section-title">
+            <h2>A Propos De Ambenatna </h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-lg-4">
+                <div class="work-item">
+                    <i class="flaticon-verify"></i>
+                    <span>Étape 01</span>
+                    <h3>Création de compte</h3>
+                    <p>Lorem ipsum dolor sit amet conscu adipiscing elit sed do eusmod tempor incididunt ut into</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="work-item">
+                    <i class="flaticon-file"></i>
+                    <span>Étape 02</span>
+                    <h3>Trouver un emploi</h3>
+                    <p>Lorem ipsum dolor sit amet conscu adipiscing elit sed do eusmod tempor incididunt ut into</p>
+                </div>
+            </div>
+            <div class="col-sm-6 offset-sm-3 offset-lg-0 col-lg-4">
+                <div class="work-item">
+                    <i class="flaticon-comment"></i>
+                    <span>Étape 03</span>
+                    <h3>Postuler</h3>
+                    <p>Lorem ipsum dolor sit amet conscu adipiscing elit sed do eusmod tempor incididunt ut into</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="job-area pb-100" id="offres">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5">
+                <div class="section-title">
+                    <h2>Les offres</h2>
+                </div>
+            </div>
+        </div>
+        <div id="container" class="row">
+            {% for job in jobs %}
+            <div class="col-sm-6 col-lg-12 mix n">
+                <div class="job-item">
+                    <a href="{% url 'job:job-detail' job.slug %}">
+                        <div class="feature-top-right">
+                            <span>Featured</span>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <div class="job-left">
+                                    <img src="{% static 'img/home-one/job1.png' %}" alt="Brand">
+                                    <h3>{{ job.title }}</h3>
+                                    <p>{{ job.user.company|default_if_none:"Xarala" }}</p>
+                                    <ul>
+                                        <!-- <li>$500 - $1,000 /</li>
+                                        <li>month /</li> -->
+                                        <li>
+                                            <i class="flaticon-appointment"></i> {{ job.created|timesince }} ago
+                                        </li>
+                                        <li>
+                                            <i class='bx bx-location-plus'></i>
+                                            {{ job.user.address|default_if_none:'Sicap Mbao' }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="job-right">
+                                    <ul>
+                                        <li>
+                                            <i class="flaticon-customer"></i> {{ job.job_type.display_choice }}
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-mortarboard"></i>
+                                            {{ job.education_level.display_choice }}
+                                        </li>
+                                        <!-- <li>
+                                            <span>Add to bookmarks</span>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="job-browse">
+            <p>Des tonnes d'emplois de haut niveau dans le domaine de la technologie vous attendent. <a
+                    href="{% url 'job:job-list' %}">Voir toutes les offres</a></p>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="section-title text-center">
+        <h2>Ambenatna En Chiffre</h2>
+    </div>
+</section>
+<div class="counter-area pt-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-lg-3">
+                <div class="counter-item">
+                    <i class="flaticon-hiring"></i>
+                    <p>CANDIDATES</p>
+                    <h3>
+                        <span class="odometer" data-count="87,360">00</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="counter-item">
+                    <i class="flaticon-candidate"></i>
+                    <p>TOTAL JOBS</p>
+                    <h3>
+                        <span class="odometer" data-count="45,257">00</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="counter-item">
+                    <i class="flaticon-working-at-home"></i>
+                    <p>EMPLOYERS</p>
+                    <h3>
+                        <span class="odometer" data-count="9,650">00</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="counter-item">
+                    <i class="flaticon-choice"></i>
+                    <p>JOB APPLICATIONS</p>
+                    <h3>
+                        <span class="odometer" data-count="70,299">00</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="company-area pb-70 pt-100" id="projets">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5">
+                <div class="section-title">
+                    <h2>Les projets</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-sm-6 col-lg-3">
+                <div class="company-item">
+                    <div class="feature-top-right">
+                        <span>Project</span>
+                    </div>
+                    <div class="top">
+                        <a href="{% url 'dashboard:project_owner_detail' project.slug %}">
+                            <img src="{% static 'img/home-one/company1.png' %}" alt="Brand">
+                        </a>
+                        <h3>
+                            <a href="{% url 'dashboard:project_owner_detail' project.slug %}">
+                                <h3>{{ project.title|capfirst|safe }}</h3>
+                            </a>
+                        </h3>
+                        <span>{{project.category}}</span>
+                        <p>
+                            {{ project.description|safe|truncatewords:"20" }}
+                        </p>
+                    </div>
+                    <div class="bottom">
+                        <ul>
+                            <li>Pay Relocation Free</li>
+                            <li>Remote Work</li>
+                            <li>Duration: 5 Years</li>
+                        </ul>
+                        <span>Budget</span>
+                        <h4>{{ project.budget}}</h4>
+                        <a href="employer-details.html">
+                            <i class="flaticon-right-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="job-browse">
+            <p>Des tonnes de projets technologiques de haut niveau vous attendent. <a href="projects/">Voir Tous les
+                    Projets</a></p>
+        </div>
+    </div>
+</section>
+
+<section class="feedback-area pt-100">
+    <div class="feedback-shape">
+        <img src="{% static 'img/home-one/banner/shape-bottom.png' %}" alt="Shape">
+    </div>
+    <div class="container">
+        <div class="section-title">
+            <h2>Témoignages</h2>
+        </div>
+        <div class="feedback-slider owl-theme owl-carousel">
+            <div class="feedback-item">
+                <h3>Jubra Ward</h3>
+                <span>CEO at Alfa School</span>
+                <p>“I’m ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniaxn ullamco laboris nisi ut at voluptatem.</p>
+                <h4>
+                    <i class="flaticon-left-quote"></i> Just Awesome
+                </h4>
+                <img src="{% static 'img/home-one/feedback1.jpg' %}" alt="Feedback">
+            </div>
+            <div class="feedback-item">
+                <h3>Robin William</h3>
+                <span>Manager Support Act It</span>
+                <p>“I’m ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniaxn ullamco laboris nisi ut at voluptatem.</p>
+                <h4>
+                    <i class="flaticon-left-quote"></i> Very Reliable
+                </h4>
+                <img src="{% static 'img/home-one/feedback2.jpg' %}" alt="Feedback">
+            </div>
+            <div class="feedback-item">
+                <h3>Tom Henry</h3>
+                <span>Director at Alfa School</span>
+                <p>“I’m ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniaxn ullamco laboris nisi ut at voluptatem.</p>
+                <h4>
+                    <i class="flaticon-left-quote"></i> Looking Nice
+                </h4>
+                <img src="{% static 'img/home-one/feedback3.jpg' %}" alt="Feedback">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="partner-area pt-100 pb-70">
+    <div class="container">
+        <div class="partner-slider owl-theme owl-carousel">
+            <div class="partner-item">
+                <img src="{% static 'img/home-one/partner1.png' %}" alt="Partner">
+                <img src="{% static 'img/home-one/partner1.png' %}" alt="Partner">
+            </div>
+            <div class="partner-item">
+                <img src="{% static 'img/home-one/partner2.png' %}" alt="Partner">
+                <img src="{% static 'img/home-one/partner2.png' %}" alt="Partner">
+            </div>
+            <div class="partner-item">
+                <img src="{% static 'img/home-one/partner3.png' %}" alt="Partner">
+                <img src="{% static 'img/home-one/partner3.png' %}" alt="Partner">
+            </div>
+            <div class="partner-item">
+                <img src="{% static 'img/home-one/partner4.png' %}" alt="Partner">
+                <img src="{% static 'img/home-one/partner4.png' %}" alt="Partner">
+            </div>
+            <div class="partner-item">
+                <img src="{% static 'img/home-one/partner5.png' %}" alt="Partner">
+                <img src="{% static 'img/home-one/partner5.png' %}" alt="Partner">
+            </div>
+            <div class="partner-item">
+                <img src="{% static 'img/home-one/partner1.png' %}" alt="Partner">
+                <img src="{% static 'img/home-one/partner1.png' %}" alt="Partner">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

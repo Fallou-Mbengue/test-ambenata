@@ -1,0 +1,33 @@
+{% extends "dash/project_owner/index.html" %}
+{% load static widget_tweaks dash_tags %}
+
+
+{% block dash_content %}
+<div class="col-lg-8">
+    <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="profile-content">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="profile-content-inner">
+                        <h2>Information Porteur de Projet</h2>
+                        <div class="row">
+                            {% for field in form %}
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>{{ field.label }}:</label> {{ field }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn dashboard-btn">
+                        Valider mes infos
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock dash_content %}
+    

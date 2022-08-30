@@ -1,0 +1,89 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row align-items-center">
+    <div class="section-title text-center">
+        <h2>{{project.title}}</h2>
+    </div>
+</div>
+<div class="job-details-area employer-details-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="details-item">
+                    <div class="details-inner">
+                        <h3>Résumer : </h3>
+                        <p></p>{{project.resume|safe}}</p>
+                    </div>
+                    <div class="details-inner">
+                        <h3>Description Projet :</h3>
+                        <p>
+                            {{project.description|safe}}
+                        </p>
+                    </div>
+                    
+                    {% if user.is_authenticated and user.is_investor %}
+                    <div class="col-lg-4">
+                        <div class="widget-area mx-auto">
+                            <div class="download widget-item">
+                                <a class="right" href="{% url 'project:new-favorit' user.id project.id %}">Ce projet m'interesse <br> <i class="fas fa-thumbs-up"></i> </a>
+                                <!--<button class="btn btn-primary">Ce projet m'interesse</button>-->
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                        <a class="right" href="{% url 'account_login' %}">Connectez-vous avec un compte investisseur  pour ajouter  au projet favorites</a>
+                    {% endif %} 
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="widget-area">
+                    <div class="information widget-item">
+                        <h3>Information Projet</h3>
+                        <ul>
+                            <li>
+                                <img src="{% static 'img/job-details-icon.png' %}" alt="Details">
+                                <h4>Category</h4>
+                                <span>{{project.category}}</span>
+                            </li>
+                            <li>
+                                <img src="{% static 'img/job-details-icon.png' %}" alt="Details">
+                                <h4>Budget</h4>
+                                <span>{{project.budget|floatformat}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="owner">
+                        <div class="top">
+                            <img src="{% static 'img/home-one/job4.png' %}" alt="Owner">
+                            <h3>Porteur de projet</h3>
+                            <i class="flaticon-send"></i>
+                            <span>{{ project.user.address|default_if_none:"Tchad" }}</span>
+                        </div>
+                        <div class="information widget-item">
+                            <ul>
+                                <li>
+                                    <img src="{% static 'img/job-details-icon.png' %}" alt="Details">
+                                    <h4>Téléphone</h4>
+                                    <a href="tel:+34561232349987">+3456 123 234 9987</a>
+                                </li>
+                                <li>
+                                    <img src="{% static 'img/job-details-icon.png' %}" alt="Details">
+                                    <h4>Adresse E-mail </h4>
+                                    <a
+                                        href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#95fdf0f9f9fad5fff0f6e1fabbf6faf8"><span
+                                            class="__cf_email__"
+                                            data-cfemail="cfa7aaa3a3a08fa5aaacbba0e1aca0a2">[email&#160;protected]</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

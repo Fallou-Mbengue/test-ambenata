@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+    <link rel="stylesheet" href="{% static 'css/meanmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/boxicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/odometer.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    {% block extrastyle %}
+
+    {% endblock extrastyle %}
+    
+</head>
+
+<body>
+
+    <!-- <div class="loader">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div> -->
+
+
+    {% include "partials/_header.html" %}
+
+    <section class="pt-100">
+        {% include "partials/_alert.html" %}
+        {% block content %}
+
+        {% endblock content %}
+    </section>
+
+    {% include "partials/_footer.html" %}
+     <script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <!--<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/js/intlTelInput-jquery.min.js" integrity="sha512-ukIH6qcYcteJIe83qld9SO3nKLKWZ+GVy5LTpPaOl/fL3Qoq1iwQ3/PHESL1Y//NgXBD6Yrsa4++0QgLaqDalw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery.mixitup.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+
+    <script src="{% static 'js/odometer.min.js' %}"></script>
+    <script src="{% static 'js/jquery.appear.js' %}"></script>
+
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
+    <script src="{% static 'js/progressbar.min.js' %}"></script>
+
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        $("#phone").intlTelInput({
+            initialCountry: "td",
+            autocomplete: "on"
+        });
+
+    </script>
+    {% block extrajs %}
+
+     {% endblock extrajs %}
+</body>
+
+
+</html>

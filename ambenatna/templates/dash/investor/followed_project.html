@@ -1,0 +1,61 @@
+{% extends "dash/investor/index.html" %}
+
+{% load static %}
+
+
+{% block dash_content %}
+<div class="user-content pt-100">
+    <div class="text-center">
+        <h1 style="color: #00205B;"> Mes Projets Favorites </h1>
+    </div>
+</div>
+<div class="employer-area two pb-100">
+    <div class="container">
+        <div class="row">
+
+            {% if followeds %}
+                {% for followedproject in followeds %}
+                <div class="col-lg-6 mx-auto mb-4">
+                    <div class="employer-item">
+                        <a href="#">
+                            <img src="{% static 'img/home-one/job1.png' %}" alt="Employer">
+                            <h3>{{ followedproject.project|capfirst|safe }}</h3>
+                            <ul>
+                                <li>
+                                    <i class="flaticon-checked"></i>
+                                </li>
+                                <li>
+                                    <i class='bx bxs-star checked'></i>
+                                </li>
+                                <li>
+                                    <i class='bx bxs-star checked'></i>
+                                </li>
+                                <li>
+                                    <i class='bx bxs-star checked'></i>
+                                </li>
+                                <li>
+                                    <i class='bx bxs-star checked'></i>
+                                </li>
+                                <li>
+                                    <i class='bx bxs-star checked'></i>
+                                </li>
+                                <li>
+                                    <span>12 Rating</span>
+                                </li>
+                            </ul>
+                            <span class="span-one">Favorit Status : {{ followedproject.is_favorite }}</span>
+                            <span class="span-two">PROJET</span>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="text-center">
+                    Pas de projet favorite pour le moment
+                </p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock dash_content %}

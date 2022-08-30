@@ -1,0 +1,134 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block content %}
+<div class="user-content  mb-4">
+    <div class="text-center">
+        <h2>Liste Des Candidats</h2>
+    </div>
+</div>
+<!-- <div class="job-filter-area pt-100">
+    <div class="container">
+        <form>
+            <div class="row">
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="form-group">
+                        <select>
+                            <option>Filter By Languages</option>
+                            <option>Another option</option>
+                            <option>A option</option>
+                            <option>Potato</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="form-group">
+                        <select>
+                            <option>Filter By Qualifications</option>
+                            <option>Another option</option>
+                            <option>A option</option>
+                            <option>Potato</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="form-group">
+                        <select>
+                            <option>Filter By Experiences</option>
+                            <option>Another option</option>
+                            <option>A option</option>
+                            <option>Potato</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <button type="submit" class="btn cmn-btn">
+                        Search By Filter
+                        <i class="bx bx-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+
+<div class="candidate-area pb-100">
+    <div class="container">
+
+
+        {% if candidates %}
+
+        <div class="row">
+            {% for candidate in candidates %}
+            <div class="col-lg-6">
+                <div class="candidate-item two">
+                    <div class="left">
+                        <h3>
+                            <a href="{% url 'candidate-details' candidate.slug %}">{{ candidate.get_full_name }}</a>
+                        </h3>
+                        <span>{{ candidate.title|default_if_none:"Développeur Web" }}</span>
+                        <ul class="experience">
+                            <li>Experience: <span>3-5 ans</span></li>
+                            <!-- <li>Hour Rate: <span>$30</span></li> -->
+                            <li>
+                                <i class="flaticon-send"></i> {{ candidate.address|default_if_none:"Tchad, N'Djamena" }}
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>Php</li>
+                            <li>jQuery</li>
+                            <li>WordPress</li>
+                            <li>CSS3</li>
+                            <li>HTML5</li>
+                        </ul>
+                        <div class="cmn-link">
+                            <a href="#">
+                                <i class="flaticon-right-arrow one"></i> Voir CV
+                                <i class="flaticon-right-arrow two"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <img src="
+                        {% if candidate.avatar %}
+                        {{ candidate.avatar.url }}
+                        {% else %}
+                        {% static 'img/candidate1.jpg' %}
+                        {% endif %}
+                    " alt="{{ candidate.get_full_name }}" />
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <!-- <div class="pagination-area">
+            <ul>
+                <li>
+                    <a href="#">Prev</a>
+                </li>
+                <li>
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">Next</a>
+                </li>
+            </ul>
+        </div> -->
+        {% else %}
+        <p class="text-center">
+            pas de talents pour le moment
+        </p>
+        {% endif %}
+
+
+
+
+    </div>
+</div>
+{% endblock content %}

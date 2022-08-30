@@ -1,0 +1,67 @@
+{% extends "dash/project_owner/index.html" %}
+{% load widget_tweaks %}
+
+{% block dash_content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- {{ form.errors }} {{ form.non_field_errors }} -->
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+        <p {% if forloop.last %} class="mb-0" {% endif %}>
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="profile-content-inner">
+        <h2 class="text-center">Publier Un Projet</h2>
+        <div class="row">
+            <div class="form-group col-lg-6">
+                {{ form.title|add_label_class:"form-label" }}
+                {% render_field form.title|add_error_class:"is-invalid" placeholder=form.title.label %}
+            </div>
+
+            <div class="form-group col-lg-6">
+                {{ form.budget|add_label_class:"form-label" }}
+                {% render_field form.budget|add_error_class:"is-invalid" placeholder=form.budget.label %}
+            </div>
+
+            <div class="form-group col-lg-6">
+                {{ form.category|add_label_class:"form-label" }}
+                {% render_field form.category|add_error_class:"is-invalid" placeholder=form.category.label %}
+            </div>
+
+            <div class="form-group col-lg-6">
+                {{ form.document|add_label_class:"form-label" }}
+                {% render_field form.document|add_error_class:"is-invalid" placeholder=form.document.label %}
+            </div>
+
+            <div class="form-group col-lg-6">
+                {{ form.logo|add_label_class:"form-label" }}
+                {% render_field form.logo|add_error_class:"is-invalid" placeholder=form.logo.label %}
+            </div>
+
+            <div class="form-group col-lg-6">
+                {{ form.resume|add_label_class:"form-label" }}
+                {% render_field form.resume|add_error_class:"is-invalid" placeholder=form.resume.label %}
+            </div>
+
+            <div class="form-group col-lg-12">
+                {{ form.description|add_label_class:"form-label" }}
+                {% render_field form.description|add_error_class:"is-invalid" placeholder=form.description.label %}
+            </div>
+
+            <div class="form-check">
+                {% render_field form.is_published|add_error_class:"is-invalid" placeholder=form.is_published.label %}
+                <label class="form-check-label" for="{{ form.is_published.id_for_label }}">
+                    {{ form.is_published.label }}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn dashboard-btn text-uppercase">publier projet</button>
+</form>
+{% endblock dash_content %}

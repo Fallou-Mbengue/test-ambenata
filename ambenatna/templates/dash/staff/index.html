@@ -1,0 +1,109 @@
+{% extends '_base.html' %}
+{% load static widget_tweaks dash_tags %}
+
+
+{% block content %}
+
+{% url "dashboard:staff" as dashboard_url %}
+{% url "dashboard:staff_candidates" as staff_candidates_url %}
+{% url "dashboard:staff_recruiters" as staff_recruiters_url %}
+{% url "dashboard:staff_investors" as staff_investors_url %}
+{% url "dashboard:staff_project_owners" as staff_project_owners_url %}
+{% url "dashboard:staff_settings" as staff_settings_url %}
+
+
+<div class="dashboard-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="profile-item">
+                    <img src="
+                        {% if user.avatar %}
+                            {{ user.avatar.url }}
+                        {% else %}
+                            {% static 'img/dashboard1.jpg' %}
+                        {% endif %}" alt="photo de {{ user.get_full_name }}">
+
+                    <h2>
+                        {{ user.get_full_name|default_if_none:'F. HUGS' }}
+                    </h2>
+                </div>
+
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link {% current_link_active 'staff' %}" href="{{ dashboard_url }}">
+                        <i class='bx bx-user'></i> Tableau de bord
+                    </a>
+                    <a class="nav-link {% current_link_active 'staff_candidates' %}" href="{{ staff_candidates_url }}">
+                        <i class='bx bx-user'></i> Liste des Candidats
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'staff_recruiters' %}" href="{{ staff_recruiters_url }}">
+                        <div class="profile-list">
+                            <i class='bx bxs-inbox'></i> Liste des Recruteurs
+                        </div>
+                    </a>
+                    <a class="nav-link {% current_link_active 'staff_investors' %}" href="{{ staff_investors_url }}">
+                        <div class="profile-list">
+                            <i class='bx bxs-inbox'></i> Liste des Investissuers
+                        </div>
+                    </a>
+                    <a class="nav-link {% current_link_active 'staff_project_owners' %}"
+                        href="{{ staff_project_owners_url }}">
+                        <div class="profile-list">
+                            <i class='bx bxs-inbox'></i> Liste des Porteurs de projet
+                        </div>
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'staff_settings' %}" href="{{ staff_settings_url }}">
+                        <div class="profile-list">
+                            <i class='bx bx-note'></i> Parametres
+                        </div>
+                    </a>
+
+                    <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">
+                        <div class="profile-list">
+                            <i class='bx bx-log-out'></i> Déconnexion
+                            <form action="{% url 'logout' %}" method="POST" id="logout">
+                                {% csrf_token %}
+                                <input type="hidden" />
+                            </form>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                {% block staff_content %}
+                <div class="row text-center">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="dash-count-item">
+                            <h3>{{ candidates }}</h3>
+                            <span>Candidats</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="dash-count-item">
+                            <h3>{{ recruiters }}</h3>
+                            <span>Recruteurs</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="dash-count-item">
+                            <h3>{{ investors }}</h3>
+                            <span>Investissuers</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="dash-count-item">
+                            <h3>{{ project_owners }}</h3>
+                            <span>Porteurs de projets</span>
+                        </div>
+                    </div>
+                </div>
+                {% endblock staff_content %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

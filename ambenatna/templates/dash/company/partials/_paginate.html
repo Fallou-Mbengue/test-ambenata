@@ -1,0 +1,38 @@
+{% if is_paginated %}
+    <div class="pagination-area">
+        <ul>
+            {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                        <i class="flaticon-left-arrow"></i>                        
+                    </a>
+                </li>
+            {% else %}
+                <li class="disabled">
+                    <a href="#">
+                       <i class="flaticon-left-arrow"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% for obj in paginator.page_range %}
+                {% if page_obj.number == obj %}
+                    <li class="{% if obj %} active {% endif %} d-none d-sm-block" aria-current="page">
+                        <a href="#">{{ obj }}</a>
+                    </li>
+                {% else %}
+                    <li aria-current="page">
+                        <a href="?page={{ obj }}">{{ obj }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        <i class="flaticon-right-arrow"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

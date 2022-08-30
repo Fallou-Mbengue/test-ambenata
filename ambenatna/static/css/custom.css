@@ -1,0 +1,8 @@
+/* dashboard */
+.dash-count-item {
+    background-color: #f8e8e9;
+    padding: 1rem;
+    border-radius: 5px;
+    -webkit-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+}

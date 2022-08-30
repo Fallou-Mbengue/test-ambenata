@@ -1,0 +1,12 @@
+{% extends "dash/company/index.html" %}
+
+{% block dash_content %}
+
+    <div class="row justify-content-between mb-4">
+        <div class="col-sm-6 col-lg-6">
+            <h3 class="font-weight-bolder">Candidatures</h3>
+        </div>
+    </div>
+
+    {% include "dash/company/partials/_candidat_list.html" with candidates=candidates %}
+{% endblock dash_content %}

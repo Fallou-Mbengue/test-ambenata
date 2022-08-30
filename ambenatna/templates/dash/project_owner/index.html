@@ -1,0 +1,82 @@
+{% extends '_base.html' %} 
+{% load static widget_tweaks dash_tags %} 
+
+{% block content %} 
+
+{% url "dashboard:project_owner_dashboard" as dashboard_url %} 
+{% url "dashboard:project_owner_profile" as profile_url %}
+{% url "dashboard:project_owner_create_project" as create_project_url %}
+{% url "dashboard:project_owner_list_project" as list_project_url %}
+{% url "dashboard:project_owner_dash_view" as dash_view_url %}
+ 
+
+<div class="dashboard-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="profile-item">
+                    <img src="
+                    {% if user.avatar %}
+                    {{ user.avatar.url }}
+                    {% else %}
+                    {% static 'img/dashboard1.jpg' %}
+                    {% endif %}
+                    " alt="Photo de {{ user.get_full_name }}" />
+                    <h2>{{ user.get_full_name }}</h2>
+                    <span>{{ user.title|default_if_none:'Porteur de projet' }}</span>
+                </div>
+                <div class="nav flex-column nav-pills">
+                    <a class=" nav-link {% current_link_active 'project_owner_dash_view' %} " href="{{ dash_view_url }}">
+                        <i class="bx bxs-inbox"></i> Tableau de bord
+                    </a>
+                    <a class=" nav-link {% current_link_active 'project_owner_dashboard' %} " href="{{ dashboard_url }}">
+                        <i class="bx bx-user"></i> Mon Profile
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'project_owner_list_project' %} {% current_link_active 'project_owner_create_project' %} " href="{{ list_project_url }}">
+                        <div class="profile-list">
+                            <i class="bx bxs-inbox"></i> Mes projects
+                        </div>
+                    </a>
+                    <a href="javascript:{document.getElementById('logout').submit()}">
+                        <div class="profile-list">
+                            <i class="bx bx-log-out"></i> Déconnexion
+                            <form action="{% url 'logout' %}" method="POST" id="logout">
+                                {% csrf_token %}
+                                <input type="hidden" />
+                            </form>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="profile-content">
+                            {% block dash_content %}
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="profile-content-inner">
+                                    <h2 class="text-center">Information personnelle</h2>
+                                    <div class="row">
+                                        {% for field in form %}
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>{{ field.label }}:</label> {{ field }}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn dashboard-btn">
+                                    Valider mes infos
+                                </button>
+                            </form>
+                            {% endblock dash_content %}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

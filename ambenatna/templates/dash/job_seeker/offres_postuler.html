@@ -1,0 +1,76 @@
+{% extends "dash/job_seeker/index.html" %}
+{% load static %}
+
+{% block dash_content %}
+
+
+<section class="job-area pb-100 pt-100">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="section-title text-center">
+                <h2>Les Offres <span style="color: #C8102E;"> d'emploi postulées </span></h2>
+            </div>
+        </div>
+
+        <div id="container" class="row">
+
+            {% for apply in offers %}
+
+            <div class="col-sm-6 col-lg-12 mix n">
+                <div class="job-item">
+                    <a href="{% url 'dashboard:job_seeker_offers_details' apply.offer.slug %}">
+                        <!-- <div class="feature-top-right">
+                                        <span>Featured</span>
+                                    </div> -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <div class="job-left">
+                                    <img src="{% static 'img/home-one/job1.png' %}" alt="Brand">
+                                    <h3>{{ apply.offer.title }}</h3>
+                                    <p>{{ apply.offer.user.company|default_if_none:"Xarala" }}</p>
+                                    <ul>
+                                        <!-- <li>$500 - $1,000 /</li>
+                                                    <li>month /</li> -->
+                                        <li>
+                                            <i class="flaticon-appointment"></i> Il y a
+                                            {{ apply.offer.created|timesince }}
+                                        </li>
+                                        <li>
+                                            <i class='bx bx-location-plus'></i>
+                                            {{ apply.offer.user.address|default_if_none:'Sicap Mbao' }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="job-right">
+                                    <ul>
+                                        <li>
+                                            <i class="flaticon-customer"></i>
+                                            {{ apply.offer.offer_type.display_choice }}
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-mortarboard"></i>
+                                            {{ apply.offer.education_level.display_choice }}
+                                        </li>
+                                        <!-- <li>
+                                                        <span>Add to bookmarks</span>
+                                                    </li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div>
+                <p>
+                    Pas d'offres en ce moment
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock dash_content %}

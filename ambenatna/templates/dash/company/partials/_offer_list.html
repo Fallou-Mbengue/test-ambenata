@@ -1,0 +1,41 @@
+{% for offer in offers %}
+    <article class="employer-item">
+        <a href="{{ offer.get_offer_update_url }}">
+            <h3>{{ offer.title|capfirst|safe }}</h3>
+            <ul>
+                <li>
+                    <i class="bx bx-time"></i>
+                    {{ offer.date_validation|date }}
+                </li>
+                <li>{{ offer.created|timesince }}</li>
+            </ul>
+            <p>
+                {{ offer.content|safe|truncatewords:"20" }}
+            </p>
+            <span class="span-two">
+                {{ offer.offer_type|capfirst|safe }}
+            </span>
+        </a>
+
+        <div class="form-group">
+            <a href="{{ offer.get_offer_update_url }}" class="btn btn-sm btn-primary text-uppercase">
+                <i class="bx bx-pencil pr-2"></i>
+                mettre à jour
+            </a>
+
+            <form method="POST" action="{{ offer.get_offer_delete_url }}" class="btn btn-sm">
+                {% csrf_token %}
+                <button type="submit" class="text-uppercase">
+                    <i class="bx bx-trash pr-2"></i>
+                    supprimer l'offre
+                </button>
+            </form>
+        </div>
+    </article>
+
+    {% include "dash/company/partials/_paginate.html" %}
+{% empty %}
+    <p class="lead text-left">
+        Vous n'avez publiez aucune offre pour le moment.
+    </p>  
+{% endfor %}

@@ -1,0 +1,19 @@
+{% extends "dash/investor/index.html" %}
+{% load static %}
+
+{% block dash_content %}
+<div class="row text-center">
+    <div class="col-sm-6 col-lg-6">
+        <div class="dash-count-item">
+            <h3>{{ project_owner }}</h3>
+            <span>Nombre de porteur de projet</span>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-6">
+        <div class="dash-count-item">
+            <h3>{{ projects }}</h3>
+            <span>Nombres de projet</span>
+        </div>
+    </div>
+</div>
+{% endblock dash_content %}

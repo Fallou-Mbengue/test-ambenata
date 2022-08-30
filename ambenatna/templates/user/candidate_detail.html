@@ -1,0 +1,57 @@
+{% extends "_base.html" %} {% load static %} {% block content %}
+<div class="user-content  mb-4">
+    <div class="text-center">
+        <h2>Détails candidat</h2>
+    </div>
+</div>
+
+<div class="candidate-area pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="candidate-item two">
+                    <div class="left">
+                        <h3>
+                            {{ candidate.get_full_name }}
+                        </h3>
+                        <span>{{ candidate.title|default_if_none:"Développeur Web" }}</span>
+                        <ul class="experience">
+                            <li>Experience: <span>3-5 ans</span></li>
+                            <!-- <li>Hour Rate: <span>$30</span></li> -->
+                            <li>
+                                <i class="flaticon-send"></i> Adresse: {{ candidate.address|default_if_none:"Tchad, N'Djamena" }}
+                            </li>
+                            <li>
+                                <i class="flaticon-send"></i> Email: {{ candidate.email}}
+                            </li>
+                            <li>
+                                <i class="flaticon-send"></i> Téléphone: {{ candidate.phone}}
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>Php</li>
+                            <li>jQuery</li>
+                            <li>WordPress</li>
+                            <li>CSS3</li>
+                            <li>HTML5</li>
+                        </ul>
+                        <div class="cmn-link">
+                            <a href="#">
+                                <i class="flaticon-right-arrow one"></i> Voir CV
+                                <i class="flaticon-right-arrow two"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <img src="
+                        {% if candidate.avatar %}
+                        {{ candidate.avatar.url }}
+                        {% else %}
+                        {% static 'img/candidate1.jpg' %}
+                        {% endif %}
+                    " alt="{{ candidate.get_full_name }}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

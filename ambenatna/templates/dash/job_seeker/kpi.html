@@ -1,0 +1,19 @@
+{% extends "dash/job_seeker/index.html" %}
+{% load static %}
+
+{% block dash_content %}
+<div class="row text-center">
+    <div class="col-sm-6 col-lg-6">
+        <div class="dash-count-item">
+            <h3>{{ candidates }}</h3>
+            <span>Nombre de Recruteurs</span>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-6">
+        <div class="dash-count-item">
+            <h3>{{ offers }}</h3>
+            <span>Nombres d'offres d'emploi</span>
+        </div>
+    </div>
+</div>
+{% endblock dash_content %}

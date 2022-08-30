@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+<style>
+    .form-tel {
+        padding-left: 5rem !important;
+        width: 589px !important;
+    }
+
+</style>
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="user-form-area pb-100 mt-5">
+    <div class="container-fluid p-0">
+        <div class="row m-0 align-items-center justify-content-center">
+            <div class="col-lg-6  mx-auto">
+                <div class="user-content w-100">
+                    <div class="top">
+                        <h2>Creation de compte</h2>
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{ field.name }}">{{ field.label }}:</label>
+                                {{ field }}
+                            </div>
+                            {% endfor %}
+
+                            <button type="submit" class="btn w-100 mx-auto"> Valider mon inscription</button>
+                        </form>
+                    </div>
+                    Deja inscrit ! <a href="{% url 'account_login' %}">Se connecter </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

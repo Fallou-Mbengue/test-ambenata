@@ -1,0 +1,44 @@
+{% extends "dash/job_seeker/index.html" %}
+{% load static %}
+
+{% block dash_content %}
+<section class="job-area pb-100 pt-100">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="section-title text-center">
+                <h2> Mon CV</h2>
+            </div>
+
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                    aria-labelledby="v-pills-home-tab">
+                    <div class="profile-content">
+                        <div class="row mx-auto mb-3">
+
+                            <embed src="
+                            {% if user.resume %}
+                            {{ user.resume.url }}
+                            {% else %}
+                            {% static 'files/cv.pdf' %}
+                            {% endif %}
+                            " width="800px" height="800px" />
+                        </div>
+
+                        <form method="POST" enctype="multipart/form-data" action="{% url 'dashboard:view-resume' %}">
+
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">Modifier votre CV</label>
+                                {{ form.resume }}
+                            </div>
+                            <button type="submit" class="btn dashboard-btn">
+                                Valider la modification
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock dash_content %}

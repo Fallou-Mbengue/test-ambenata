@@ -1,0 +1,58 @@
+{% extends "dash/project_owner/index.html" %}
+
+{% load static %}
+
+{% block dash_content %}
+
+{% url 'dashboard:project_owner_create_project' as create_project_url %}
+
+<div class="row justify-content-between">
+    <div class="col-sm-6 col-lg-6">
+        <h3 class="font-weight-bolder">Mes projets</h3>
+    </div>
+
+    <div class="col-sm-6 col-lg-6">
+        <div class="form-group">
+            <a class="btn dashboard-btn text-uppercase" href="{{ create_project_url }}">
+                Publier un projet
+                <i class="bx bx-plus"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+{% for project in projects %}
+<div class="employer-item">
+    <a href="{{ project.get_offer_update_url }}">
+        <h3>{{ project.title|capfirst|safe }}</h3>
+        <ul>
+            <li>
+                Budget:{{ project.budget}}
+            </li>
+        </ul>
+        <p>
+            {{ project.description|safe|truncatewords:"20" }}
+        </p>
+    </a>
+
+    <div class="form-group">
+        <a href="{{ project.get_offer_update_url }}" class="btn btn-sm btn-primary text-uppercase">
+            <i class="bx bx-pencil pr-2"></i>
+            mettre à jour
+        </a>
+
+        <a class="btn btn-sm btn-danger text-uppercase" href="{{ project.get_offer_delete_url }}">
+            <i class="bx bx-trash pr-2"></i>
+            supprimer projet
+        </a>
+    </div>
+</div>
+{% empty %}
+<div>
+    <p>
+        Pas de projet en ce moment
+    </p>
+</div>
+{% endfor %}
+{% endblock dash_content %}

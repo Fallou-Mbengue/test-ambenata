@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==3"
+pillow = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
+argon2-cffi = "*"
+django-allauth = "*"
+django-3-jet = "*"
+django-summernote = "*"
+django-widget-tweaks = "*"
+babel = "*"
+gunicorn = "*"
+dj-database-url = "*"
+psycopg2 = "*"
+django-taggit = "*"
+readtime = "*"
+pytest-django = "*"
+pytest = "*"
+
+[dev-packages]
+autopep8 = "*"
+flake8 = "*"
+black = "*"
+
+[requires]
+python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true

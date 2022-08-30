@@ -1,0 +1,166 @@
+{% extends '_base.html' %}
+{% load static widget_tweaks dash_tags %}
+
+{% block head_title %}
+    {{ page_title|default_if_none:'dashboard'|capfirst }} &smid;
+    {{ request.user.company }} &smid;
+    {{ block.super }}
+{% endblock head_title %}
+
+{% block content %}
+
+{% url "dashboard:recruiter_dashboard" as dashboard_url %}
+{% url 'dashboard:recruiter_list_offer' as list_offer_url %}
+{% url 'dashboard:recruiter_create_offer' as create_offer_url %}
+{% url "dashboard:recruiter_candidate_apply" as candidate_apply_url %}
+{% url "dashboard:recruiter_dialogue" as recruiter_dialogue_url %}
+{% url "dashboard:recruiter_settings" as recruiter_settings_url %}
+
+<div class="dashboard-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="profile-item">
+                    <img src="
+                        {% if user.avatar %}
+                            {{ user.get_avatar_url }}
+                        {% else %}
+                            {% static 'img/dashboard1.jpg' %}
+                        {% endif %}" alt="photo de {{ user.get_full_name }}">
+
+                    <h2>
+                        {{ user.company|default_if_none:'Unsta Inc' }}
+                    </h2>
+                    <span>
+                        {{ user.get_full_name|default_if_none:'F. HUGS' }}
+                    </span>
+                </div>
+
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link {% current_link_active 'recruiter_dashboard' %}" href="{{ dashboard_url }}">
+                        <i class='bx bx-user'></i> Tableau de bord
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'recruiter_dialogue' %}"
+                        href="{{ recruiter_dialogue_url }}">
+                        <div class="profile-list">
+                            <i class='bx bx-note'></i>
+                            Messages
+                        </div>
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'recruiter_list_offer' %} {% current_link_active 'recruiter_create_offer' %} {% current_link_active 'recruiter_update_offer' %}"
+                        href="{{ list_offer_url }}">
+                        <div class="profile-list">
+                            <i class='bx bxs-inbox'></i> Mes Offres
+                        </div>
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'recruiter_candidate_apply' %}"
+                        href="{{ candidate_apply_url }}">
+                        <div class="profile-list">
+                            <i class='bx bx-note'></i>
+                            Mes Candidats
+                        </div>
+                    </a>
+
+                    <a class="nav-link {% current_link_active 'recruiter_settings' %}"
+                        href="{{ recruiter_settings_url }}">
+                        <div class="profile-list">
+                            <i class='bx bx-note'></i>
+                            Paramètre
+                        </div>
+                    </a>
+
+                    <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">
+                        <div class="profile-list">
+                            <i class='bx bx-log-out'></i>
+                            Déconnexion
+                            <form action="{% url 'logout' %}" method="POST" id="logout">
+                                {% csrf_token %}
+                                <input type="hidden" />
+                            </form>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="profile-content">
+                    {% block dash_content %}
+                        <div class="row text-center">
+                            <div class="col-sm-4 col-lg-4">
+                                <div class="dash-count-item">
+                                    <h3>{{ offers_count }}</h3>
+                                    <span>Offre{{ offers_count|pluralize }} d'emploi</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-4">
+                                <div class="dash-count-item">
+                                    <h3>{{ candidates_count }}</h3>
+                                    <span>Candidat{{ candidates_count|pluralize:',s' }}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-4">
+                                <div class="dash-count-item">
+                                    <h3>{{ messages_count }}</h3>
+                                    <span>Message{{ messages_count|pluralize:',s' }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <div class="row justify-content-between my-4">
+                                <div class="col-sm-6 col-lg-6">
+                                    <h3 class="font-weight-bolder">Candidatures</h3>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-6">
+                                    <a class="btn dashboard-btn text-uppercase" href="{{ candidate_apply_url }}">
+                                        Voir tous
+                                        <i class="flaticon-right-arrow"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            {% include "dash/company/partials/_candidat_list.html" with candidates=candidates %}
+
+                            <p class="text-center">
+                                <a href="{{ candidate_apply_url }}" class="btn dashboard-btn text-uppercase">
+                                Afficher toutes les candidatures</a>
+                            </p>
+                        </div>
+
+                        <div class="my-5">
+                            <div class="row justify-content-between my-4">
+                                <div class="col-sm-6 col-lg-4">
+                                    <h3 class="font-weight-bolder">Mes offres</h3>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4">
+                                    <a class="btn dashboard-btn text-uppercase" href="{{ create_offer_url }}">
+                                        vos offres
+                                        <i class="flaticon-right-arrow"></i>
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4">
+                                    <a class="btn dashboard-btn text-uppercase" href="{{ create_offer_url }}">
+                                        publier une offre
+                                        <i class="bx bx-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            {% include "dash/company/partials/_offer_list.html" with offers=offers %}
+
+                            <p class="text-center">
+                                <a href="{{ create_offer_url }}" class="btn dashboard-btn text-uppercase">
+                                Afficher tous les offres</a>
+                            </p>
+                        </div>
+                    {% endblock dash_content %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
