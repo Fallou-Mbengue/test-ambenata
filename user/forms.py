@@ -51,20 +51,20 @@ class UserSignupForm(SignupForm):
     last_name = forms.CharField(label="prénom", max_length=100)
     first_name = forms.CharField(label="nom de famille", max_length=100)
     email = forms.EmailField(label="adresse email", required=False)
-    is_investor = forms.BooleanField(
-        label="je suis un investisseur",
-        required=False
-    )
-    is_project_owner = forms.BooleanField(
-        label="je suis un porteur de projet",
-        required=False
-    )
+    # is_investor = forms.BooleanField(
+    #     label="je suis un investisseur",
+    #     required=False
+    # )
+    # is_project_owner = forms.BooleanField(
+    #     label="je suis un porteur de projet",
+    #     required=False
+    # )
     is_job_seeker = forms.BooleanField(
-        label="je cherche un emploi",
+        label="Je suis étudiant",
         required=False
     )
     is_recruiter = forms.BooleanField(
-        label="je suis une entreprise",
+        label="je suis professeur",
         required=False
     )
     privacy = forms.BooleanField(required=True)
@@ -82,10 +82,10 @@ class UserSignupForm(SignupForm):
 
 
 ACCOUNT_TYPE_CHOICES = (
-    ("investor", "Je suis investisseur"),
-    ("project_owner", "je suis porteur de projet", ),
-    ("job_seeker", "je suis chercheur d'emploi"),
-    ("recrutor", "Je suis recruteur"),
+    # ("investor", "Je suis investisseur"),
+    # ("project_owner", "je suis porteur de projet", ),
+    ("job_seeker", "je suis étudiant"),
+    ("recrutor", "Je suis professeur"),
 )
 
 

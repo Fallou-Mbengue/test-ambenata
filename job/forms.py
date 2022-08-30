@@ -11,21 +11,22 @@ class OfferPostFrom(forms.ModelForm):
     formulaire d'enregistrement d'emploi
     """
 
-    category = forms.ModelChoiceField(
-        queryset=Category.objects.all(),
-        label="Catégorie d'emploi",
-        empty_label=None,
-        widget=forms.Select({"class": "form-control float-none"}))
+    # category = forms.ModelChoiceField(
+    #     queryset=Category.objects.all(),
+    #     label="Catégorie d'emploi",
+    #     empty_label=None,
+    #     widget=forms.Select({"class": "form-control float-none"}))
 
     class Meta:
         model = Offer
         fields = [
-            'category', 'offer_type',
+            # 'category', 
+            'offer_type',
             'education_level',
 
-            'title', 'content', 
-            'document_desc', 
-            
+            'title', 'content',
+            'document_desc',
+
             'date_validation',
             'is_published',
         ]

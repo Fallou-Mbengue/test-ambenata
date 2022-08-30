@@ -29,7 +29,7 @@
                         {% endif %}" alt="photo de {{ user.get_full_name }}">
 
                     <h2>
-                        {{ user.company|default_if_none:'Unsta Inc' }}
+                        {{ user.company|default_if_none:'Enseignant' }}
                     </h2>
                     <span>
                         {{ user.get_full_name|default_if_none:'F. HUGS' }}
@@ -92,13 +92,13 @@
                             <div class="col-sm-4 col-lg-4">
                                 <div class="dash-count-item">
                                     <h3>{{ offers_count }}</h3>
-                                    <span>Offre{{ offers_count|pluralize }} d'emploi</span>
+                                    <span>Projets{{ offers_count|pluralize }} crées</span>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-lg-4">
                                 <div class="dash-count-item">
                                     <h3>{{ candidates_count }}</h3>
-                                    <span>Candidat{{ candidates_count|pluralize:',s' }}</span>
+                                    <span>Projets postulés{{ candidates_count|pluralize:',s' }}</span>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-lg-4">
@@ -112,7 +112,7 @@
                         <div class="mt-5">
                             <div class="row justify-content-between my-4">
                                 <div class="col-sm-6 col-lg-6">
-                                    <h3 class="font-weight-bolder">Candidatures</h3>
+                                    <h3 class="font-weight-bolder">Projets postulés</h3>
                                 </div>
 
                                 <div class="col-sm-6 col-lg-6">
@@ -145,7 +145,7 @@
 
                                 <div class="col-sm-6 col-lg-4">
                                     <a class="btn dashboard-btn text-uppercase" href="{{ create_offer_url }}">
-                                        publier une offre
+                                        programmer un devoir
                                         <i class="bx bx-plus"></i>
                                     </a>
                                 </div>

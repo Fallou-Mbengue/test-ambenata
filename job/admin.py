@@ -10,21 +10,21 @@ admin.site.register(Experience)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    model = Category
+    # model = Category
     list_per_page = 10
     list_filter = ["title"]
     list_display = ['title']
     list_display_links = ['title']
     fieldsets = (
-        (
-            'Categorie', {
-                'classes': ('collapse',),
-                'fields': (
-                   'title',
-                   'slug'
-                )
-            }
-        ),
+        # (
+        #     'Categorie', {
+        #         'classes': ('collapse',),
+        #         'fields': (
+        #            'title',
+        #            'slug'
+        #         )
+        #     }
+        # ),
     )
     prepopulated_fields = {
         "slug": ("title",)
@@ -41,10 +41,10 @@ class OfferAdmin(admin.ModelAdmin):
             'Offer information', {
                 'classes': ('collapse',),
                 'fields': (
-                   'user',
-                   ('title', 'slug'),
-                   'category',
-                   'offer_type',
+                    'user',
+                    ('title', 'slug'),
+                    #    'category',
+                    'offer_type',
                     'is_published',
                 )
             }
@@ -53,9 +53,9 @@ class OfferAdmin(admin.ModelAdmin):
             'Offer Description', {
                 'classes': ('collapse',),
                 'fields': (
-                   'document_desc',
-                   'education_level',
-                   'content',
+                    'document_desc',
+                    'education_level',
+                    'content',
                     'date_validation',
                 )
             }
@@ -63,14 +63,14 @@ class OfferAdmin(admin.ModelAdmin):
     )
     list_display = [
         'user', 'title',
-        'category',
+        # 'category',
         'offer_type',
         'education_level',
         'created',
         'is_published'
     ]
     list_display_links = ['user', 'title']
-    list_filter = ["category", "is_published"]
+    # list_filter = ["category", "is_published"]
     list_editable = ["is_published"]
     search_fields = (
         "user",
@@ -79,7 +79,7 @@ class OfferAdmin(admin.ModelAdmin):
     )
     readonly_fields = [
         'user',
-        'category',
+        # 'category',
         'content',
         'date_validation'
     ]
@@ -98,9 +98,9 @@ class ApplyAdmin(admin.ModelAdmin):
             'Information sur la candidature', {
                 'classes': ('collapse',),
                 'fields': (
-                   'candidate',
-                   'offer',
-                   'status'
+                    'candidate',
+                    'offer',
+                    'status'
                 )
             }
         ),

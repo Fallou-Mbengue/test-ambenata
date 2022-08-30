@@ -12,7 +12,7 @@
             <div class="col-lg-8">
                 <div class="details-item">
                     <div class="section-title">
-                        <h2>Description de l'offre</h2>
+                        <h2>Description du projet</h2>
                         {{ offer.content|safe}}
                     </div>
 
@@ -22,7 +22,7 @@
             <div class="col-lg-4">
                 <div class="widget-area">
                     <div class="information widget-item">
-                        <h3>Information de L'offre</h3>
+                        <h3>Information du projet</h3>
                         <ul>
                             <!-- <li>
                                 <img src="{% static 'img/job-details-icon.png' %}" alt="Details" />
@@ -31,12 +31,12 @@
                             </li>-->
                             <li>
                                 <img src="{% static 'img/job-details-icon.png'%}" alt="Details" />
-                                <h4>Type D'emploi:</h4>
+                                <h4>Type projet:</h4>
                                 <span>{{offer.offer_type}}</span>
                             </li>
                             <li>
                                 <img src="{% static 'img/job-details-icon.png' %}" alt="Details" />
-                                <h4>Qualification:</h4>
+                                <h4>Classe:</h4>
                                 <span>{{offer.education_level}}</span>
                             </li>
                         </ul>
@@ -48,9 +48,8 @@
                         <a class="right" href="{% url 'job:new-apply' user.id offer.id %}">Postuler</a>
                     </div>
                     {% else %}
-                    <a class="right" href="{% url 'account_login' %}">Connectez-vous avec un compte chercheur d'emploi
-                        pour
-                        postuler</a>
+                    <a class="right" href="{% url 'account_login' %}">Connectez-vous avec un compte étudiant
+                        pour soumettre votre projet</a>
                     {% endif %}
 
                 </div>

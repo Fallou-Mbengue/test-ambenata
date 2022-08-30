@@ -44,17 +44,14 @@ class Category(BaseTimeStampedModel):
 class Offer(BaseTimeStampedModel):
 
     OFFER_CHOICES = (
-        ('Freelance', 'Freelance'),
-        ('Full-Time', 'Full-Time'),
-        ('Part-Time', 'Part-Time')
+        ('Examen', 'Examen'),
+        ('Devoir', 'Devoir'),
     )
 
     EDUCATION_CHOICES = (
-        ('Bac', 'Bac'),
-        ('Bac+2', 'Bac+2'),
-        ('Licene', 'Licene'),
-        ('Master', 'Master'),
-        ('All', 'Tous les niveaux')
+        ('L1-GI', 'L1-GI'),
+        ('L2-GI', 'L2-GI'),
+        ('L3-GI', 'L3-GI'),
     )
 
     user = models.ForeignKey(
@@ -66,11 +63,11 @@ class Offer(BaseTimeStampedModel):
         on_delete=models.CASCADE
     )
     title = models.CharField(
-        verbose_name="Intitulé de l'emploi",
+        verbose_name="Donner un titre",
         max_length=180, null=True
     )
     content = models.TextField(
-        verbose_name="description de l'emploi",
+        verbose_name="donner une description",
         null=True
     )
     document_desc = models.FileField(
@@ -79,30 +76,30 @@ class Offer(BaseTimeStampedModel):
         **NULL_AND_BLANK
     )
     date_validation = models.DateTimeField(
-        verbose_name="deadline", auto_now=False,
+        verbose_name="Date limite", auto_now=False,
         auto_now_add=False
     )
-    category = models.ForeignKey(
-        to=Category,
-        verbose_name="catégorie d'emploi",
-        on_delete=models.SET_NULL,
-        null=True,
-    )
+    # category = models.ForeignKey(
+    #     to=Category,
+    #     verbose_name="catégorie d'emploi",
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    # )
     offer_type = models.CharField(
         verbose_name="type d'offre",
         choices=OFFER_CHOICES,
-        default="Freelance",
+        default="Examen",
         max_length=180, null=True
     )
     education_level = models.CharField(
         choices=EDUCATION_CHOICES,
-        default="Bac",
-        verbose_name="qualification du poste",
+        default="L1-GI",
+        verbose_name="Classe",
         max_length=180, null=True
     )
     is_published = models.BooleanField(
         default=False,
-        verbose_name="publier l'offre"
+        verbose_name="publier"
     )
     slug = models.SlugField(
         unique=True,
