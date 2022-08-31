@@ -29,10 +29,10 @@
                         {% endif %}" alt="photo de {{ user.get_full_name }}">
 
                     <h2>
-                        {{ user.company|default_if_none:'Enseignant' }}
+                        {{ user.get_full_name|default_if_none:'F. HUGS' }}
                     </h2>
                     <span>
-                        {{ user.get_full_name|default_if_none:'F. HUGS' }}
+                        {{ user.company|default_if_none:'Enseignant' }} 
                     </span>
                 </div>
 

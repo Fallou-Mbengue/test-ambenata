@@ -23,7 +23,7 @@
                     {% endif %}
                     " alt="Photo de {{ user.get_full_name }}" />
                     <h2>{{ user.get_full_name }}</h2>
-                    <span>{{ user.title|default_if_none:'Chercheur emplois' }}</span>
+                    <span>{{ user.title|default_if_none:'Etudiant' }}</span>
                 </div>
                 <div class="nav flex-column nav-pills">
                     <a class="nav-link {% current_link_active 'job_seeker_kpi' %}" href="{{ kpi_url }}">
@@ -32,7 +32,7 @@
 
                     <a class=" nav-link {% current_link_active 'job_seeker_offres_postuler' %} "
                         href="{{ offers_postuler_url }}">
-                        <i class="bx bxs-inbox"></i> Offres Postulées
+                        <i class="bx bxs-inbox"></i> Projets Postulés
                     </a>
 
                     <a class="nav-link {% current_link_active 'view-resume' %}" href="{{ view_cv_url }}">
