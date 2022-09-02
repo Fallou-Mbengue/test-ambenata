@@ -37,7 +37,8 @@ class DialogueView(mixins.DispatchRecruiterMixin, generic.View):
     def get(self, request, *args, **kwargs):
 
         chats = models.Chat.objects.filter(members__in=[request.user.id])
-        context = {"chats": chats, "page_title": "messages", "profile": request.user}
+        context = {"chats": chats, "page_title": "messages",
+                   "profile": request.user}
         return render(request, self.template_name, context)
 
 
